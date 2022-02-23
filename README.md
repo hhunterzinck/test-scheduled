@@ -22,12 +22,18 @@ docker run --rm -e SYNAPSE_AUTH_TOKEN=$SYNAPSE_AUTH_TOKEN test-scheduled
 
 ## Service Catalog Scheduled Job
 
-Cache your Synapse personal access token (PAT) as a secret:
-```
-{"SYNAPSE_AUTH_TOKEN":"your_personal_access_token_here"}
-```
-
-Use the available Docker image for this repository:
+In the `Image` field, specify the available Docker image for this repository:
 ```
 hhunterzinck/test-scheduled
+```
+
+In the `Secrets`, set your Synapse personal access token (PAT):
+```
+"SYNAPSE_AUTH_TOKEN":"your_personal_access_token_here"
+```
+
+In the `Command` field, specify any command line arguments, using `\` to escape any spaces: 
+
+```
+-s onewordsubject
 ```
