@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import argparse
 
 import synapseclient
 from synapseclient import Synapse
@@ -77,10 +78,21 @@ def get_user_ids(syn: Synapse, users: list = None):
 def main():
     """Invoke"""
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-s",
+        "--subject",
+        metavar="subject",
+        type=str,
+        default="this is a test email",
+        help="Email subject line: (default %(default)s)",
+    )
+    args = parser.parse_args()
+
     syn = synapse_login()
     syn.sendMessage(
                 get_user_ids(syn),
-                "test email",
+                args.subject,
                 f"{time.strftime('%H:%M:%S')} this email has been sent via the synapseclient",
                 contentType="text/html",
             )
